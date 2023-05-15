@@ -1,13 +1,17 @@
 import * as actionTypes from "constants/action_types";
-import { PRODUCTS } from "constants/product";
 
 const INITIAL_STATE = {
-  products: [...PRODUCTS],
+  products: [],
   cart: [],
 };
 
-const cartReducer = (state = INITIAL_STATE, action) => {
+export const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case actionTypes.GET_PRODUCTS:
+      return {
+        ...state,
+        products: [...action.payload.products],
+      };
     case actionTypes.ADD_TO_CART:
       // Great Item data from products array
       const item = state.products.find(
@@ -58,5 +62,3 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
-export default cartReducer;

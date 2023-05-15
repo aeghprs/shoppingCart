@@ -1,14 +1,34 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getProducts } from "actions/product_actions";
+import { getAllProducts } from "api/getAllProducts";
+
 import { Product } from "components/Product";
 
-import { PRODUCTS } from "constants/product";
+const ProductItem = () => {
+  const dispatch = useDispatch();
 
-const ProductItem = () => (
-  <div className="grid grid-rows-3 grid-flow-col gap-4 w-full ">
-    {PRODUCTS.map((product) => (
-      <Product data={product} />
-    ))}
-  </div>
-);
+  useEffect(() => {
+    const allProducts = async () => {
+      const products = await getAllProducts();
+
+      dispatch(getProducts(products));
+    };
+
+    allProducts();
+  }, []);
+
+  const Products = useSelector((state) => state.cart.products);
+
+  return (
+    <div className="grid grid-rows-6 grid-cols-4 grid-flow-col gap-4 w-full ">
+      {Products.map((product) => (
+        <Product data={product} />
+      ))}
+    </div>
+  );
+};
 
 export const Shop = () => (
   <div className="shop">
