@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "actions/product_actions";
 import { getAllProducts } from "api/getAllProducts";
 
+import Loader from "components/Loader";
 import { Product } from "components/Product";
 import "./pagination.css";
 
@@ -32,6 +33,8 @@ const ProductItem = () => {
 
     allProducts();
   }, []);
+
+  if (!Products.length) return <Loader />;
 
   return (
     <>
