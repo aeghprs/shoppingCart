@@ -1,0 +1,31 @@
+.paginationContainer {
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 1.25rem;
+  }
+  
+  .paginationContainer a {
+    padding: 0.625rem;
+    margin: 0.5rem;
+    border-radius: 0.3125rem;
+    background-color: #000000;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .paginationContainer a:hover {
+    color: white;
+    background-color: blueviolet;
+  }
+  
+  .paginationDisabled a {
+    color: rgb(140, 157, 140);
+    background-color: rgb(196, 196, 196);
+  }
+
+  .paginationActive a {
+    background-color: blueviolet;
+    color: #000000;
+  }
