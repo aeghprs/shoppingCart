@@ -1,4 +1,6 @@
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   addToCart,
@@ -21,9 +23,13 @@ export const CartItem = ({ data }) => {
         <div className="countHandler">
           <button
             onClick={() => {
-              qty === 1
-                ? dispatch(removeFromCart(id))
-                : dispatch(decreaseItemQty(id, 1));
+              if (qty === 1) {
+                dispatch(removeFromCart(id));
+                toast.error("Product removed from cart");
+              } else {
+                dispatch(decreaseItemQty(id, 1));
+                toast.warn("Product item removed from cart");
+              }
             }}
           >
             {" "}
@@ -33,6 +39,17 @@ export const CartItem = ({ data }) => {
           <button onClick={() => dispatch(addToCart(id))}>+ </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
